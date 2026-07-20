@@ -1,0 +1,135 @@
+%==============================================================
+%  Academic CV  --  PhD Application
+%  Compile:  pdflatex cv.tex   (run twice for correct links)
+%  Fill in every  <...>  placeholder and delete unused entries.
+%==============================================================
+\documentclass[11pt,a4paper]{article}
+
+%----------------------  Packages  ---------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+% \usepackage{fontawesome5}   % uncomment for icons (needs texlive-fonts-extra)
+
+\hypersetup{colorlinks=true, urlcolor=blue!55!black, linkcolor=black}
+
+%----------------------  Section style  ----------------------
+\titleformat{\section}
+  {\large\bfseries\scshape}{}{0em}{}[\vspace{2pt}\hrule\vspace{4pt}]
+\titlespacing{\section}{0pt}{12pt}{6pt}
+
+% Two-column entry:  \entry{left}{right}
+\newcommand{\entry}[2]{%
+  \noindent\begin{minipage}[t]{0.80\textwidth}#1\end{minipage}%
+  \hfill\begin{minipage}[t]{0.19\textwidth}\raggedleft #2\end{minipage}\par}
+
+\setlist[itemize]{leftmargin=1.4em, itemsep=1pt, topsep=2pt}
+\pagestyle{empty}
+
+%==============================================================
+\begin{document}
+
+%----------------------  Header  -----------------------------
+\begin{center}
+  {\huge\bfseries <Miru Hong>}\\[4pt]
+  {\small
+    <Seoul, South Korea> \\[2pt]
+    Email: \href{mailto:<email>}{<email>} \quad
+    Tel: <phone> \quad
+    Web: \href{https://<website>}{<website>} \\[2pt]
+    \href{https://github.com/<id>}{GitHub} \quad
+    \href{https://orcid.org/<id>}{ORCID} \quad
+    \href{https://scholar.google.com/<id>}{Google Scholar}
+  }
+\end{center}
+\vspace{4pt}
+
+%----------------------  Research Interests  -----------------
+\section{Research Interests}
+<Comma-separated list, e.g. Machine Learning, Sports Analytics,
+Spatiotemporal Modeling, Causal Inference>
+
+%----------------------  Education  --------------------------
+\section{Education}
+\entry{\textbf{<University Name>}, <Department>}{<City, Country>}
+\noindent\textit{<Degree, e.g. M.S. in Statistics>} \hfill \textit{<Start>--<End or Expected 20XX>}\\
+\begin{itemize}
+  \item Advisor: <Advisor Name> \quad|\quad GPA: <x.xx/4.0>
+  \item Thesis: \textit{<Thesis Title>}
+\end{itemize}
+\vspace{4pt}
+
+\entry{\textbf{<University Name>}, <Department>}{<City, Country>}
+\noindent\textit{<Degree, e.g. B.S. in ...>} \hfill \textit{<Start>--<End>}\\
+\begin{itemize}
+  \item GPA: <x.xx/4.0> \quad|\quad <Honors, e.g. summa cum laude>
+\end{itemize}
+
+%----------------------  Publications  -----------------------
+\section{Publications}
+\textit{$^{\ast}$ equal contribution \quad $^{\dagger}$ corresponding author}
+
+\subsection*{Peer-Reviewed}
+\begin{enumerate}[leftmargin=1.6em, label=\arabic*.]
+  \item <Authors>. ``<Title>.'' \textit{<Venue>}, <Year>.
+        \href{https://<link>}{[paper]} \href{https://<link>}{[code]}
+\end{enumerate}
+
+\subsection*{Preprints / Under Review}
+\begin{enumerate}[leftmargin=1.6em, label=\arabic*.]
+  \item <Authors>. ``<Title>.'' Under review at \textit{<Venue>}, <Year>.
+\end{enumerate}
+
+%----------------------  Research Experience  ----------------
+\section{Research Experience}
+\entry{\textbf{<Lab / Institution>} --- <Role, e.g. Research Assistant>}{<Start>--<End>}
+\begin{itemize}
+  \item <Start with an action verb; keep it concise>
+  \item <Quantify results with numbers where possible>
+\end{itemize}
+
+%----------------------  Teaching Experience  ----------------
+\section{Teaching Experience}
+\entry{\textbf{<Course Name>} --- Teaching Assistant, <University>}{<Term>}
+
+%----------------------  Awards & Honors  --------------------
+\section{Awards \& Honors}
+\entry{<Award / Scholarship>}{<Year>}
+\entry{<Award / Scholarship>}{<Year>}
+
+%----------------------  Skills  -----------------------------
+\section{Technical Skills}
+\begin{itemize}
+  \item \textbf{Programming:} <Python, R, C++, ...>
+  \item \textbf{ML / Data:} <PyTorch, scikit-learn, pandas, ...>
+  \item \textbf{Tools:} <Git, LaTeX, Linux, ...>
+  \item \textbf{Languages:} <Korean (native), English (TOEFL xxx / IELTS x.x)>
+\end{itemize}
+
+%----------------------  Presentations  ----------------------
+\section{Talks \& Presentations}
+\entry{``<Talk Title>,'' <Event / Venue>}{<Year>}
+
+%----------------------  Service  ----------------------------
+\section{Professional Service}
+\begin{itemize}
+  \item Reviewer: <Venue>, <Year>
+\end{itemize}
+
+%----------------------  References  -------------------------
+\section{References}
+\entry{\textbf{<Referee Name>}, <Title>}{}
+\noindent <Affiliation> \quad|\quad \href{mailto:<email>}{<email>}
+\vspace{4pt}
+
+\entry{\textbf{<Referee Name>}, <Title>}{}
+\noindent <Affiliation> \quad|\quad \href{mailto:<email>}{<email>}
+
+\vfill
+\begin{center}\scriptsize Last updated: <Month Year>\end{center}
+
+\end{document}

@@ -1,0 +1,284 @@
+<!--
+  Academic CV page. Reached from index.html via the "CV" nav link.
+  Fill in every <...> placeholder to match your cv.tex.
+  Note: the <style> block is intentionally the same as index.html — if you change
+  a color, change it in both files.
+-->
+<title>CV — &lt;Full Name&gt;</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Academic CV of <Full Name>.">
+
+<style>
+  :root {
+    --paper:#f8f7f3; --surface:#fdfcfa; --ink:#1b1d21; --muted:#6c6e74;
+    --faint:#93949a; --rule:#e4e1d8; --accent:#1f8a4c; --accent-2:#1f8a4c14;
+    --measure:40rem;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#15161a; --surface:#191b20; --ink:#e7e5df; --muted:#9a9ca3;
+            --faint:#74767c; --rule:#2a2c32; --accent:#52c07d; --accent-2:#52c07d1f; }
+  }
+  :root[data-theme="light"] { --paper:#f8f7f3; --surface:#fdfcfa; --ink:#1b1d21; --muted:#6c6e74;
+            --faint:#93949a; --rule:#e4e1d8; --accent:#1f8a4c; --accent-2:#1f8a4c14; }
+  :root[data-theme="dark"]  { --paper:#15161a; --surface:#191b20; --ink:#e7e5df; --muted:#9a9ca3;
+            --faint:#74767c; --rule:#2a2c32; --accent:#52c07d; --accent-2:#52c07d1f; }
+
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans);
+         font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; text-underline-offset:3px; }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+  .nav { position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between;
+         gap:1rem; padding:.7rem clamp(1rem,4vw,2.5rem);
+         background:color-mix(in srgb, var(--paper) 86%, transparent);
+         backdrop-filter:saturate(1.4) blur(8px); border-bottom:1px solid var(--rule); }
+  .nav__name { font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .nav__name:hover { color:var(--ink); text-decoration:none; }
+  .nav__links { display:flex; align-items:center; gap:1.2rem; }
+  .nav__links a { font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+  .nav__links a:hover { text-decoration:none; }
+
+  .wrap { max-width:var(--measure); margin:0 auto; padding:0 clamp(1.1rem,4vw,1.5rem); }
+
+  .hero { padding:clamp(2.6rem,7vw,4rem) 0 2rem; }
+  .hero h1 { font-family:var(--serif); font-weight:600; font-size:clamp(2.3rem,7vw,3.3rem);
+             line-height:1.03; letter-spacing:-.015em; margin:0 0 .5rem; text-wrap:balance; }
+  .hero .role { font-family:var(--mono); font-size:.82rem; letter-spacing:.06em; color:var(--accent);
+                text-transform:uppercase; margin:0 0 1.4rem; }
+  .contact { color:var(--muted); font-size:.95rem; margin:0 0 .35rem; }
+  .contact a { color:var(--muted); }
+  .contact a:hover { color:var(--accent); }
+  .idlinks { display:flex; flex-wrap:wrap; gap:.1rem 1.1rem; font-size:.95rem; margin-top:.2rem; }
+
+  .btn { display:inline-flex; align-items:center; gap:.55rem; margin-top:1.7rem;
+         font-family:var(--mono); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+         color:var(--surface); background:var(--accent); padding:.68rem 1.15rem; border-radius:2px;
+         border:1px solid var(--accent); transition:transform .12s ease, opacity .12s ease; }
+  .btn:hover { text-decoration:none; transform:translateY(-1px); opacity:.93; }
+  .btn svg { width:1em; height:1em; }
+
+  section { padding:2.1rem 0; border-top:1px solid var(--rule); scroll-margin-top:4.5rem; }
+  .label { font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+           color:var(--faint); margin:0 0 1.2rem; }
+  p { margin:0 0 .8rem; }
+  .lead { color:var(--muted); }
+
+  .entry { display:grid; grid-template-columns:1fr auto; gap:.3rem 1.4rem; align-items:baseline; margin-bottom:1.5rem; }
+  .entry:last-child { margin-bottom:0; }
+  .entry__title { font-weight:600; font-family:var(--serif); font-size:1.12rem; }
+  .entry__sub { color:var(--muted); font-size:.95rem; grid-column:1; }
+  .entry__date { grid-row:1; grid-column:2; font-family:var(--mono); font-size:.8rem; color:var(--faint);
+                 white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .entry ul { margin:.5rem 0 0; padding-left:1.1rem; grid-column:1 / -1; }
+  .entry li { margin:.2rem 0; }
+  @media (max-width:560px) { .entry { grid-template-columns:1fr; } .entry__date { grid-row:auto; grid-column:1; } }
+
+  .pub-group { margin-bottom:1.6rem; }
+  .pub-group h3 { font-family:var(--mono); font-size:.74rem; letter-spacing:.08em; text-transform:uppercase;
+                  color:var(--muted); font-weight:500; margin:0 0 .8rem; }
+  ol.pubs { list-style:none; counter-reset:pub; margin:0; padding:0; }
+  ol.pubs li { counter-increment:pub; position:relative; padding-left:2rem; margin-bottom:1rem; }
+  ol.pubs li::before { content:counter(pub, decimal-leading-zero); position:absolute; left:0; top:.12em;
+                       font-family:var(--mono); font-size:.78rem; color:var(--accent); }
+  .pubs .me { font-weight:700; }
+  .pubs .venue { font-style:italic; }
+  .pubs .tag { font-family:var(--mono); font-size:.74rem; color:var(--accent); }
+  .legend { font-size:.85rem; color:var(--faint); font-style:italic; margin-bottom:1rem; }
+
+  .skills { display:grid; gap:.55rem; }
+  .skills div { display:grid; grid-template-columns:8.5rem 1fr; gap:.3rem 1rem; }
+  .skills .k { font-family:var(--mono); font-size:.78rem; color:var(--muted); letter-spacing:.04em; padding-top:.1rem; }
+  @media (max-width:520px) { .skills div { grid-template-columns:1fr; } }
+
+  .refs { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+  @media (max-width:560px) { .refs { grid-template-columns:1fr; } }
+  .ref .name { font-weight:600; font-family:var(--serif); }
+  .ref .aff { color:var(--muted); font-size:.92rem; }
+
+  footer { border-top:1px solid var(--rule); padding:2rem 0 3.5rem; }
+  footer p { font-family:var(--mono); font-size:.74rem; color:var(--faint); text-align:center; margin:0; letter-spacing:.05em; }
+
+  .reveal { opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    .reveal { opacity:1; transform:none; transition:none; }
+    .btn { transition:none; }
+  }
+</style>
+
+<nav class="nav">
+  <a class="nav__name" href="index.html">← Home</a>
+  <span class="nav__links">
+    <a href="cv.pdf" download>Download PDF&nbsp;↓</a>
+  </span>
+</nav>
+
+<header class="hero wrap">
+  <h1>&lt;Full Name&gt;</h1>
+  <p class="role">&lt;PhD Applicant · Statistics / Machine Learning&gt;</p>
+
+  <p class="contact">&lt;Address, City, Country&gt;</p>
+  <p class="contact">
+    <a href="mailto:&lt;email&gt;">&lt;email&gt;</a>
+    &nbsp;·&nbsp; &lt;phone&gt;
+    &nbsp;·&nbsp; <a href="https://&lt;website&gt;">&lt;website&gt;</a>
+  </p>
+  <p class="idlinks">
+    <a href="https://github.com/&lt;id&gt;">GitHub</a>
+    <a href="https://orcid.org/&lt;id&gt;">ORCID</a>
+    <a href="https://scholar.google.com/&lt;id&gt;">Google Scholar</a>
+  </p>
+
+  <a class="btn" href="cv.pdf" download>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+    Download CV (PDF)
+  </a>
+</header>
+
+<main class="wrap">
+
+  <section id="research" class="reveal">
+    <p class="label">01 — Research Interests</p>
+    <p class="lead">&lt;Comma-separated list, e.g. Machine Learning, Sports Analytics, Spatiotemporal Modeling, Causal Inference&gt;</p>
+  </section>
+
+  <section id="education" class="reveal">
+    <p class="label">02 — Education</p>
+    <div class="entry">
+      <span class="entry__title">&lt;University Name&gt;, &lt;Department&gt;</span>
+      <span class="entry__date">&lt;Start&gt;–&lt;Expected 20XX&gt;</span>
+      <span class="entry__sub">&lt;M.S. in Statistics&gt; · &lt;City, Country&gt;</span>
+      <ul>
+        <li>Advisor: &lt;Advisor Name&gt; &nbsp;|&nbsp; GPA: &lt;x.xx / 4.0&gt;</li>
+        <li>Thesis: <em>&lt;Thesis Title&gt;</em></li>
+      </ul>
+    </div>
+    <div class="entry">
+      <span class="entry__title">&lt;University Name&gt;, &lt;Department&gt;</span>
+      <span class="entry__date">&lt;Start&gt;–&lt;End&gt;</span>
+      <span class="entry__sub">&lt;B.S. in ...&gt; · &lt;City, Country&gt;</span>
+      <ul>
+        <li>GPA: &lt;x.xx / 4.0&gt; &nbsp;|&nbsp; &lt;Honors, e.g. summa cum laude&gt;</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="publications" class="reveal">
+    <p class="label">03 — Publications</p>
+    <p class="legend">∗ equal contribution &nbsp; † corresponding author</p>
+
+    <div class="pub-group">
+      <h3>Peer-Reviewed</h3>
+      <ol class="pubs">
+        <li>
+          &lt;Authors, with <span class="me">your name in bold</span>&gt;. "&lt;Title&gt;."
+          <span class="venue">&lt;Venue&gt;</span>, &lt;Year&gt;.
+          <a class="tag" href="#">[paper]</a> <a class="tag" href="#">[code]</a>
+        </li>
+      </ol>
+    </div>
+
+    <div class="pub-group">
+      <h3>Preprints / Under Review</h3>
+      <ol class="pubs">
+        <li>
+          &lt;Authors, with <span class="me">your name in bold</span>&gt;. "&lt;Title&gt;."
+          Under review at <span class="venue">&lt;Venue&gt;</span>, &lt;Year&gt;.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="experience" class="reveal">
+    <p class="label">04 — Research Experience</p>
+    <div class="entry">
+      <span class="entry__title">&lt;Lab / Institution&gt; — &lt;Research Assistant&gt;</span>
+      <span class="entry__date">&lt;Start&gt;–&lt;End&gt;</span>
+      <ul>
+        <li>&lt;Start with an action verb; keep it concise&gt;</li>
+        <li>&lt;Quantify results with numbers where possible&gt;</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="teaching" class="reveal">
+    <p class="label">05 — Teaching Experience</p>
+    <div class="entry">
+      <span class="entry__title">&lt;Course Name&gt; — Teaching Assistant</span>
+      <span class="entry__date">&lt;Term&gt;</span>
+      <span class="entry__sub">&lt;University&gt;</span>
+    </div>
+  </section>
+
+  <section id="awards" class="reveal">
+    <p class="label">06 — Awards &amp; Honors</p>
+    <div class="entry">
+      <span class="entry__title">&lt;Award / Scholarship&gt;</span>
+      <span class="entry__date">&lt;Year&gt;</span>
+    </div>
+    <div class="entry">
+      <span class="entry__title">&lt;Award / Scholarship&gt;</span>
+      <span class="entry__date">&lt;Year&gt;</span>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <p class="label">07 — Technical Skills</p>
+    <div class="skills">
+      <div><span class="k">Programming</span><span>&lt;Python, R, C++, ...&gt;</span></div>
+      <div><span class="k">ML / Data</span><span>&lt;PyTorch, scikit-learn, pandas, ...&gt;</span></div>
+      <div><span class="k">Tools</span><span>&lt;Git, LaTeX, Linux, ...&gt;</span></div>
+      <div><span class="k">Languages</span><span>&lt;Korean (native), English (TOEFL xxx / IELTS x.x)&gt;</span></div>
+    </div>
+  </section>
+
+  <section id="talks" class="reveal">
+    <p class="label">08 — Talks &amp; Presentations</p>
+    <div class="entry">
+      <span class="entry__title">"&lt;Talk Title&gt;"</span>
+      <span class="entry__date">&lt;Year&gt;</span>
+      <span class="entry__sub">&lt;Event / Venue&gt;</span>
+    </div>
+  </section>
+
+  <section id="service" class="reveal">
+    <p class="label">09 — Professional Service</p>
+    <ul>
+      <li>Reviewer: &lt;Venue&gt;, &lt;Year&gt;</li>
+    </ul>
+  </section>
+
+  <section id="references" class="reveal">
+    <p class="label">10 — References</p>
+    <div class="refs">
+      <div class="ref">
+        <div class="name">&lt;Referee Name&gt;</div>
+        <div class="aff">&lt;Title&gt;, &lt;Affiliation&gt;</div>
+        <a href="mailto:&lt;email&gt;">&lt;email&gt;</a>
+      </div>
+      <div class="ref">
+        <div class="name">&lt;Referee Name&gt;</div>
+        <div class="aff">&lt;Title&gt;, &lt;Affiliation&gt;</div>
+        <a href="mailto:&lt;email&gt;">&lt;email&gt;</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p><a href="index.html">← Back to home</a> &nbsp;·&nbsp; Last updated: &lt;Month Year&gt;</p>
+</footer>
+
+<script>
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+</script>

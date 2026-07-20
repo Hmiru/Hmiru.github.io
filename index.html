@@ -1,382 +1,304 @@
 <!--
-  Personal academic homepage — single file, no build step.
-  Deploy: drop this file (as index.html) + cv.pdf into a GitHub repo,
-          enable Settings > Pages. Done.
-  Fill in every <...> placeholder below to match your cv.tex.
+  Personal landing page. Sections: About / Problems to solve / Interests / Photos.
+  The academic CV lives in cv.html (linked from the nav as "CV").
+  Fill in every <...> placeholder. Replace photo tiles with your own <img> files.
+  Note: the <style> block is intentionally the same as cv.html — if you change a
+  color, change it in both files.
 -->
-<title>&lt;Full Name&gt; — Academic CV</title>
+<title>&lt;Full Name&gt;</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Academic homepage and CV of <Full Name>.">
+<meta name="description" content="Personal homepage of <Full Name>.">
 
 <style>
   :root {
-    --paper:    #f8f7f3;
-    --surface:  #fdfcfa;
-    --ink:      #1b1d21;
-    --muted:    #6c6e74;
-    --faint:    #93949a;
-    --rule:     #e4e1d8;
-    --accent:   #35507a;
-    --accent-2: #35507a14;
-    --measure:  40rem;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
-    --sans:  system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --mono:  ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --paper:#f8f7f3; --surface:#fdfcfa; --ink:#1b1d21; --muted:#6c6e74;
+    --faint:#93949a; --rule:#e4e1d8; --accent:#1f8a4c; --accent-2:#1f8a4c14;
+    --line:#cdd9c4; --lime:#7ec12a;
+    --measure:42rem;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
-      --paper:    #15161a;
-      --surface:  #191b20;
-      --ink:      #e7e5df;
-      --muted:    #9a9ca3;
-      --faint:    #74767c;
-      --rule:     #2a2c32;
-      --accent:   #8fb2e2;
-      --accent-2: #8fb2e21f;
-    }
+    :root { --paper:#15161a; --surface:#191b20; --ink:#e7e5df; --muted:#9a9ca3;
+            --faint:#74767c; --rule:#2a2c32; --accent:#52c07d; --accent-2:#52c07d1f;
+            --line:#2c352c; --lime:#a3e635; }
   }
-  :root[data-theme="light"] {
-    --paper:#f8f7f3; --surface:#fdfcfa; --ink:#1b1d21; --muted:#6c6e74;
-    --faint:#93949a; --rule:#e4e1d8; --accent:#35507a; --accent-2:#35507a14;
-  }
-  :root[data-theme="dark"] {
-    --paper:#15161a; --surface:#191b20; --ink:#e7e5df; --muted:#9a9ca3;
-    --faint:#74767c; --rule:#2a2c32; --accent:#8fb2e2; --accent-2:#8fb2e21f;
-  }
+  :root[data-theme="light"] { --paper:#f8f7f3; --surface:#fdfcfa; --ink:#1b1d21; --muted:#6c6e74;
+            --faint:#93949a; --rule:#e4e1d8; --accent:#1f8a4c; --accent-2:#1f8a4c14;
+            --line:#cdd9c4; --lime:#7ec12a; }
+  :root[data-theme="dark"]  { --paper:#15161a; --surface:#191b20; --ink:#e7e5df; --muted:#9a9ca3;
+            --faint:#74767c; --rule:#2a2c32; --accent:#52c07d; --accent-2:#52c07d1f;
+            --line:#2c352c; --lime:#a3e635; }
 
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 17px;
-    line-height: 1.62;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  body { margin:0; position:relative; overflow-x:clip; background:var(--paper); color:var(--ink); font-family:var(--sans);
+         font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; text-underline-offset:3px; }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
 
-  /* ---- top nav ---------------------------------------------------- */
-  .nav {
-    position: sticky; top: 0; z-index: 10;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 1rem;
-    padding: .7rem clamp(1rem, 4vw, 2.5rem);
-    background: color-mix(in srgb, var(--paper) 86%, transparent);
-    backdrop-filter: saturate(1.4) blur(8px);
-    border-bottom: 1px solid var(--rule);
-  }
-  .nav__name {
-    font-family: var(--serif);
-    font-size: 1.02rem; font-weight: 600; letter-spacing: .01em;
-  }
-  .nav__links { display: flex; align-items: center; gap: 1.2rem; }
-  .nav__links a {
-    font-family: var(--mono);
-    font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--muted);
-  }
-  .nav__links a:hover { color: var(--ink); text-decoration: none; }
-  .nav__links a.active { color: var(--accent); }
-  @media (max-width: 720px) { .nav__scroll { display: none; } }
+  /* football pitch — full length; scrolling moves you from the opponent goal (top)
+     across the halfway line to your own goal (bottom) */
+  .pitch { position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%);
+           width:min(92vw,46rem); z-index:-1; pointer-events:none;
+           --box-h:clamp(78px,13vh,140px);
+           border:1.5px solid var(--line); }
+  .pitch span { position:absolute; display:block; border:1.5px solid var(--line); }
+  .pitch .half   { left:0; right:0; top:50%; height:0; border:0; border-top:1.5px solid var(--line); }
+  .pitch .circle { top:50%; left:50%; width:min(34vw,11rem); aspect-ratio:1;
+                   border:1.5px solid var(--line); border-radius:50%; transform:translate(-50%,-50%); }
+  .pitch .box  { left:50%; transform:translateX(-50%); width:min(62%,26rem); height:var(--box-h); }
+  .pitch .box.t { top:0; border-top:0; } .pitch .box.b { bottom:0; border-bottom:0; }
+  .pitch .six  { left:50%; transform:translateX(-50%); width:min(34%,13rem); height:calc(var(--box-h)*0.42); }
+  .pitch .six.t { top:0; border-top:0; } .pitch .six.b { bottom:0; border-bottom:0; }
+  .pitch .arc  { left:50%; transform:translateX(-50%); width:min(30%,10rem); aspect-ratio:2/1; }
+  .pitch .arc.t { top:var(--box-h); border-top:0; border-radius:0 0 999px 999px; }
+  .pitch .arc.b { bottom:var(--box-h); border-bottom:0; border-radius:999px 999px 0 0; }
+  .pitch .spot { left:50%; width:5px; height:5px; border:0; border-radius:50%;
+                 background:var(--line); transform:translateX(-50%); }
+  .pitch .spot.t { top:calc(var(--box-h)*0.62); } .pitch .spot.b { bottom:calc(var(--box-h)*0.62); }
+  .pitch .goal { left:50%; transform:translateX(-50%); width:min(16%,5.5rem); height:0; border:0; }
+  .pitch .goal.t { top:-2px; border-top:3px solid var(--accent); }
+  .pitch .goal.b { bottom:-2px; border-bottom:3px solid var(--accent); }
 
-  /* ---- layout ----------------------------------------------------- */
-  .wrap { max-width: var(--measure); margin: 0 auto; padding: 0 clamp(1.1rem, 4vw, 1.5rem); }
+  .nav { position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between;
+         gap:1rem; padding:.7rem clamp(1rem,4vw,2.5rem);
+         background:color-mix(in srgb, var(--paper) 86%, transparent);
+         backdrop-filter:saturate(1.4) blur(8px); border-bottom:1px solid var(--rule); }
+  .nav__name { font-family:var(--serif); font-size:1.02rem; font-weight:600; letter-spacing:.01em; }
+  .nav__links { display:flex; align-items:center; gap:1.2rem; }
+  .nav__links a { font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .nav__links a:hover { color:var(--ink); text-decoration:none; }
+  .nav__links a.active { color:var(--accent); }
+  .nav__links a.cv { color:var(--accent); }
+  @media (max-width:720px) { .nav__scroll { display:none; } }
 
-  .hero { padding: clamp(3rem, 9vw, 5.5rem) 0 2.4rem; }
-  .hero h1 {
-    font-family: var(--serif); font-weight: 600;
-    font-size: clamp(2.5rem, 7.5vw, 3.7rem);
-    line-height: 1.02; letter-spacing: -.015em;
-    margin: 0 0 .5rem; text-wrap: balance;
-  }
-  .hero .role {
-    font-family: var(--mono); font-size: .82rem;
-    letter-spacing: .06em; color: var(--accent);
-    text-transform: uppercase; margin: 0 0 1.4rem;
-  }
-  .contact { color: var(--muted); font-size: .95rem; margin: 0 0 .35rem; }
-  .contact a { color: var(--muted); }
-  .contact a:hover { color: var(--accent); }
-  .idlinks { display: flex; flex-wrap: wrap; gap: .1rem 1.1rem; font-size: .95rem; margin-top: .2rem; }
+  .wrap { max-width:var(--measure); margin:0 auto; padding:0 clamp(1.1rem,4vw,1.5rem); }
 
-  .btn {
-    display: inline-flex; align-items: center; gap: .55rem;
-    margin-top: 1.7rem;
-    font-family: var(--mono); font-size: .78rem;
-    letter-spacing: .06em; text-transform: uppercase;
-    color: var(--surface); background: var(--accent);
-    padding: .68rem 1.15rem; border-radius: 2px;
-    border: 1px solid var(--accent);
-    transition: transform .12s ease, opacity .12s ease;
-  }
-  .btn:hover { text-decoration: none; transform: translateY(-1px); opacity: .93; }
-  .btn svg { width: 1em; height: 1em; }
+  /* hero */
+  .hero { padding:clamp(3rem,9vw,5.5rem) 0 2.4rem; }
+  .hero__grid { display:grid; grid-template-columns:1fr; gap:2rem; align-items:center; }
+  @media (min-width:640px) { .hero__grid { grid-template-columns:1fr auto; } }
+  .hero .kick { display:block; width:2.6rem; height:.3rem; background:var(--lime); border-radius:2px; margin:0 0 1.1rem; }
+  .hero .role { font-family:var(--mono); font-size:.82rem; letter-spacing:.06em; color:var(--accent);
+                text-transform:uppercase; margin:0 0 1rem; }
+  .hero h1 { font-family:var(--serif); font-weight:600; font-size:clamp(2.5rem,7.5vw,3.7rem);
+             line-height:1.02; letter-spacing:-.015em; margin:0 0 1rem; text-wrap:balance; }
+  .hero .lead { color:var(--muted); font-size:1.12rem; max-width:32ch; margin:0; }
+  .portrait { width:clamp(120px,32vw,168px); aspect-ratio:1; border-radius:4px; border:1px solid var(--rule);
+              background:var(--surface); display:grid; place-items:center; justify-self:start; overflow:hidden; }
+  .portrait img { width:100%; height:100%; object-fit:cover; }
+  .portrait span { font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; color:var(--faint); text-transform:uppercase; }
 
-  /* ---- sections --------------------------------------------------- */
-  section { padding: 2.1rem 0; border-top: 1px solid var(--rule); scroll-margin-top: 4.5rem; }
-  .label {
-    font-family: var(--mono); font-size: .72rem;
-    letter-spacing: .12em; text-transform: uppercase;
-    color: var(--faint); margin: 0 0 1.2rem;
-  }
-  section h2 {
-    font-family: var(--serif); font-weight: 600;
-    font-size: 1.5rem; letter-spacing: -.01em;
-    margin: 0 0 1.15rem;
-  }
-  p { margin: 0 0 .8rem; }
-  .lead { color: var(--muted); }
+  /* sections */
+  section { padding:2.4rem 0; border-top:1px solid var(--rule); scroll-margin-top:4.5rem; }
+  .label { font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+           color:var(--faint); margin:0 0 1.2rem; }
+  section h2 { font-family:var(--serif); font-weight:600; font-size:1.6rem; letter-spacing:-.01em; margin:0 0 1rem; text-wrap:balance; }
+  p { margin:0 0 .9rem; }
+  .prose { max-width:60ch; }
+  .prose p { color:var(--ink); }
 
-  /* ledger entry: main block + right-aligned mono date */
-  .entry {
-    display: grid; grid-template-columns: 1fr auto; gap: .3rem 1.4rem;
-    align-items: baseline; margin-bottom: 1.5rem;
-  }
-  .entry:last-child { margin-bottom: 0; }
-  .entry__title { font-weight: 600; font-family: var(--serif); font-size: 1.12rem; }
-  .entry__sub { color: var(--muted); font-size: .95rem; grid-column: 1; }
-  .entry__date {
-    grid-row: 1; grid-column: 2;
-    font-family: var(--mono); font-size: .8rem; color: var(--faint);
-    white-space: nowrap; font-variant-numeric: tabular-nums;
-  }
-  .entry ul { margin: .5rem 0 0; padding-left: 1.1rem; grid-column: 1 / -1; }
-  .entry li { margin: .2rem 0; }
-  @media (max-width: 560px) {
-    .entry { grid-template-columns: 1fr; }
-    .entry__date { grid-row: auto; grid-column: 1; }
-  }
+  /* problems: hairline-separated entries */
+  .prob { padding:1.1rem 0; border-bottom:1px solid var(--rule); }
+  .prob:last-child { border-bottom:0; }
+  .prob h3 { font-family:var(--serif); font-weight:600; font-size:1.18rem; margin:0 0 .35rem; }
+  .prob .idx { font-family:var(--mono); font-size:.78rem; color:var(--accent); margin-right:.6rem; }
+  .prob p { color:var(--muted); margin:0; max-width:58ch; }
 
-  /* publications */
-  .pub-group { margin-bottom: 1.6rem; }
-  .pub-group h3 {
-    font-family: var(--mono); font-size: .74rem; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--muted); font-weight: 500;
-    margin: 0 0 .8rem;
-  }
-  ol.pubs { list-style: none; counter-reset: pub; margin: 0; padding: 0; }
-  ol.pubs li {
-    counter-increment: pub; position: relative;
-    padding-left: 2rem; margin-bottom: 1rem;
-  }
-  ol.pubs li::before {
-    content: counter(pub, decimal-leading-zero);
-    position: absolute; left: 0; top: .12em;
-    font-family: var(--mono); font-size: .78rem; color: var(--accent);
-  }
-  .pubs .me { font-weight: 700; }
-  .pubs .venue { font-style: italic; }
-  .pubs .tag {
-    font-family: var(--mono); font-size: .74rem; color: var(--accent);
-  }
-  .legend { font-size: .85rem; color: var(--faint); font-style: italic; margin-bottom: 1rem; }
+  /* interests: chips + note */
+  .chips { display:flex; flex-wrap:wrap; gap:.5rem; margin:0 0 1.1rem; }
+  .chip { font-family:var(--mono); font-size:.76rem; letter-spacing:.03em; color:var(--ink);
+          background:var(--accent-2); border:1px solid var(--rule); padding:.32rem .7rem; border-radius:2px; }
 
-  .skills { display: grid; gap: .55rem; }
-  .skills div { display: grid; grid-template-columns: 8.5rem 1fr; gap: .3rem 1rem; }
-  .skills .k { font-family: var(--mono); font-size: .78rem; color: var(--muted); letter-spacing: .04em; padding-top: .1rem; }
-  @media (max-width: 520px) { .skills div { grid-template-columns: 1fr; } }
+  /* photos */
+  .gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:.9rem; }
+  @media (min-width:620px) { .gallery { grid-template-columns:repeat(3,1fr); } }
+  .shot { position:relative; aspect-ratio:4/5; border:1px solid var(--rule); border-radius:3px;
+          background:var(--surface); overflow:hidden; display:grid; place-items:center; }
+  .shot img { width:100%; height:100%; object-fit:cover; display:block; }
+  .shot .ph { font-family:var(--mono); font-size:.7rem; letter-spacing:.08em; color:var(--faint); text-transform:uppercase; }
+  figure { margin:0; }
+  figcaption { font-family:var(--mono); font-size:.72rem; color:var(--faint); margin-top:.4rem; letter-spacing:.03em; }
 
-  .refs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
-  @media (max-width: 560px) { .refs { grid-template-columns: 1fr; } }
-  .ref .name { font-weight: 600; font-family: var(--serif); }
-  .ref .aff { color: var(--muted); font-size: .92rem; }
+  .cvcta { display:inline-flex; align-items:center; gap:.55rem; margin-top:.4rem;
+           font-family:var(--mono); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+           color:var(--surface); background:var(--accent); padding:.68rem 1.15rem; border-radius:2px;
+           border:1px solid var(--accent); transition:transform .12s ease, opacity .12s ease; }
+  .cvcta:hover { text-decoration:none; transform:translateY(-1px); opacity:.93; }
 
-  footer { border-top: 1px solid var(--rule); padding: 2rem 0 3.5rem; }
-  footer p { font-family: var(--mono); font-size: .74rem; color: var(--faint); text-align: center; margin: 0; letter-spacing: .05em; }
-
-  /* scroll reveal */
-  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
-  .reveal.in { opacity: 1; transform: none; }
+  /* "back of the net" CTA — the button is the ball; hover slots it home */
+  .goalwrap { position:relative; display:inline-block; margin-top:1.7rem; padding-top:2.3rem;
+      --px:.6em; --py:-2.7rem; --r:340deg; }
+  .goalwrap .net { position:absolute; top:0; left:0; right:0; transform:none;
+      width:auto; height:2.1rem;
+      border:2px solid var(--line); border-bottom:0; border-radius:5px 5px 0 0;
+      background-image:
+        repeating-linear-gradient(0deg,var(--line) 0 1px, transparent 1px 11px),
+        repeating-linear-gradient(90deg,var(--line) 0 1px, transparent 1px 11px);
+      background-size:11px 11px; opacity:.5; pointer-events:none;
+      transition:border-color .35s ease, opacity .35s ease, box-shadow .35s ease; }
+  .goalwrap .cvcta { margin-top:0; position:relative; z-index:1; }
+  .cvcta .ball { width:1.05em; height:1.05em; border-radius:50%; background:var(--surface);
+      border:1.5px solid currentColor; box-sizing:border-box; position:relative; z-index:2; }
+  .cvcta .arr { transition:transform .2s ease; }
+  .goalwrap:hover .arr { transform:translateX(3px); }
+  .goalwrap:hover .net, .goalwrap.shoot .net { border-color:var(--lime); opacity:.95; box-shadow:0 0 0 1px var(--accent-2); }
+  /* trajectory is randomized per shot via --px / --py / --r (set by JS) */
+  .goalwrap.shoot .ball { animation:shot .8s cubic-bezier(.4,0,.3,1); }
+  .goalwrap.shoot .net  { animation:netpop .55s ease .28s; }
+  @keyframes shot {
+    0%   { transform:none; }
+    22%  { transform:translate(calc(var(--px)*.55), calc(var(--py)*.62)) rotate(calc(var(--r)*.45)); }
+    46%  { transform:translate(var(--px), var(--py)) rotate(var(--r)); }
+    58%  { transform:translate(var(--px), var(--py)) rotate(calc(var(--r) + 18deg)); }
+    100% { transform:none; }
+  }
+  @keyframes netpop {
+    0%,100% { transform:none; }
+    45%     { transform:translateY(3px); }
+    72%     { transform:translateY(-1px); }
+  }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .btn { transition: none; }
+    .goalwrap.shoot .ball, .goalwrap.shoot .net { animation:none; }
+  }
+
+  footer { border-top:1px solid var(--rule); padding:2.4rem 0 3.5rem; display:flex; flex-wrap:wrap;
+           gap:1rem 1.5rem; align-items:center; justify-content:space-between; }
+  footer .who { font-family:var(--serif); font-size:1rem; }
+  footer .contact { font-size:.92rem; color:var(--muted); }
+  footer .contact a { color:var(--muted); }
+  footer .contact a:hover { color:var(--accent); }
+
+  .reveal { opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    .reveal { opacity:1; transform:none; transition:none; }
+    .cvcta { transition:none; }
   }
 </style>
+
+<div class="pitch" aria-hidden="true">
+  <span class="half"></span>
+  <span class="circle"></span>
+  <span class="box t"></span><span class="six t"></span><span class="arc t"></span><span class="spot t"></span><span class="goal t"></span>
+  <span class="box b"></span><span class="six b"></span><span class="arc b"></span><span class="spot b"></span><span class="goal b"></span>
+</div>
 
 <nav class="nav">
   <span class="nav__name">&lt;Full Name&gt;</span>
   <span class="nav__links">
     <span class="nav__scroll">
-      <a href="#research">Research</a>
-      <a href="#publications">Publications</a>
-      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#problems">Problems</a>
+      <a href="#photos">Photos</a>
     </span>
-    <a href="cv.pdf" download>CV&nbsp;↓</a>
+    <a class="cv" href="cv.html">CV&nbsp;→</a>
   </span>
 </nav>
 
 <header class="hero wrap">
-  <h1>&lt;Full Name&gt;</h1>
-  <p class="role">&lt;PhD Applicant · Statistics / Machine Learning&gt;</p>
-
-  <p class="contact">&lt;Address, City, Country&gt;</p>
-  <p class="contact">
-    <a href="mailto:&lt;email&gt;">&lt;email&gt;</a>
-    &nbsp;·&nbsp; &lt;phone&gt;
-    &nbsp;·&nbsp; <a href="https://&lt;website&gt;">&lt;website&gt;</a>
-  </p>
-  <p class="idlinks">
-    <a href="https://github.com/&lt;id&gt;">GitHub</a>
-    <a href="https://orcid.org/&lt;id&gt;">ORCID</a>
-    <a href="https://scholar.google.com/&lt;id&gt;">Google Scholar</a>
-  </p>
-
-  <a class="btn" href="cv.pdf" download>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
-    Download CV (PDF)
-  </a>
+  <div class="hero__grid">
+    <div>
+      <span class="kick"></span>
+      <p class="role">&lt;Football Analytics · Statistics&gt;</p>
+      <h1>&lt;Full Name&gt;</h1>
+      <p class="lead">&lt;One or two sentences: who you are and what drives you. e.g. "I read the game through data — modeling how football teams move, create space, and win."&gt;</p>
+      <div class="goalwrap">
+        <span class="net" aria-hidden="true"></span>
+        <a class="cvcta" href="cv.html"><span class="ball" aria-hidden="true"></span>View my CV<span class="arr">→</span></a>
+      </div>
+    </div>
+    <!-- Replace the <span> with: <img src="me.jpg" alt="Portrait of <Full Name>"> -->
+    <div class="portrait"><span>Photo</span></div>
+  </div>
 </header>
 
 <main class="wrap">
 
-  <section id="research" class="reveal">
-    <p class="label">01 — Research Interests</p>
-    <p class="lead">&lt;Comma-separated list, e.g. Machine Learning, Sports Analytics, Spatiotemporal Modeling, Causal Inference&gt;</p>
-  </section>
-
-  <section id="education" class="reveal">
-    <p class="label">02 — Education</p>
-    <div class="entry">
-      <span class="entry__title">&lt;University Name&gt;, &lt;Department&gt;</span>
-      <span class="entry__date">&lt;Start&gt;–&lt;Expected 20XX&gt;</span>
-      <span class="entry__sub">&lt;M.S. in Statistics&gt; · &lt;City, Country&gt;</span>
-      <ul>
-        <li>Advisor: &lt;Advisor Name&gt; &nbsp;|&nbsp; GPA: &lt;x.xx / 4.0&gt;</li>
-        <li>Thesis: <em>&lt;Thesis Title&gt;</em></li>
-      </ul>
-    </div>
-    <div class="entry">
-      <span class="entry__title">&lt;University Name&gt;, &lt;Department&gt;</span>
-      <span class="entry__date">&lt;Start&gt;–&lt;End&gt;</span>
-      <span class="entry__sub">&lt;B.S. in ...&gt; · &lt;City, Country&gt;</span>
-      <ul>
-        <li>GPA: &lt;x.xx / 4.0&gt; &nbsp;|&nbsp; &lt;Honors, e.g. summa cum laude&gt;</li>
-      </ul>
+  <section id="about" class="reveal">
+    <p class="label">About</p>
+    <h2>Who I am</h2>
+    <div class="prose">
+      <p>&lt;A short paragraph about your background — where you're from, what you studied, how you got into your field.&gt;</p>
+      <p>&lt;A second paragraph about how you think or work — what kind of problems pull you in, what you value in research or building things.&gt;</p>
     </div>
   </section>
 
-  <section id="publications" class="reveal">
-    <p class="label">03 — Publications</p>
-    <p class="legend">∗ equal contribution &nbsp; † corresponding author</p>
-
-    <div class="pub-group">
-      <h3>Peer-Reviewed</h3>
-      <ol class="pubs">
-        <li>
-          &lt;Authors, with <span class="me">your name in bold</span>&gt;. "&lt;Title&gt;."
-          <span class="venue">&lt;Venue&gt;</span>, &lt;Year&gt;.
-          <a class="tag" href="#">[paper]</a> <a class="tag" href="#">[code]</a>
-        </li>
-      </ol>
+  <section id="problems" class="reveal">
+    <p class="label">Focus</p>
+    <h2>Problems I want to solve</h2>
+    <div class="prob">
+      <h3><span class="idx">01</span>&lt;A football/data question you care about&gt;</h3>
+      <p>&lt;Why it matters to you, and the angle you'd take. e.g. "How do you measure the value of an off-the-ball run?" Two or three sentences.&gt;</p>
     </div>
-
-    <div class="pub-group">
-      <h3>Preprints / Under Review</h3>
-      <ol class="pubs">
-        <li>
-          &lt;Authors, with <span class="me">your name in bold</span>&gt;. "&lt;Title&gt;."
-          Under review at <span class="venue">&lt;Venue&gt;</span>, &lt;Year&gt;.
-        </li>
-      </ol>
+    <div class="prob">
+      <h3><span class="idx">02</span>&lt;A second problem&gt;</h3>
+      <p>&lt;What's unsolved, and why you're drawn to it.&gt;</p>
+    </div>
+    <div class="prob">
+      <h3><span class="idx">03</span>&lt;A third problem&gt;</h3>
+      <p>&lt;Keep each one concrete and personal.&gt;</p>
     </div>
   </section>
 
-  <section id="experience" class="reveal">
-    <p class="label">04 — Research Experience</p>
-    <div class="entry">
-      <span class="entry__title">&lt;Lab / Institution&gt; — &lt;Research Assistant&gt;</span>
-      <span class="entry__date">&lt;Start&gt;–&lt;End&gt;</span>
-      <ul>
-        <li>&lt;Start with an action verb; keep it concise&gt;</li>
-        <li>&lt;Quantify results with numbers where possible&gt;</li>
-      </ul>
+  <section id="interests" class="reveal">
+    <p class="label">Off the clock</p>
+    <h2>What I like</h2>
+    <div class="chips">
+      <span class="chip">Football</span>
+      <span class="chip">&lt;interest&gt;</span>
+      <span class="chip">&lt;interest&gt;</span>
+      <span class="chip">&lt;interest&gt;</span>
+      <span class="chip">&lt;interest&gt;</span>
+    </div>
+    <div class="prose">
+      <p>&lt;A few sentences on what you enjoy outside work — hobbies, sports, music, books, anything that says something about you.&gt;</p>
     </div>
   </section>
 
-  <section id="teaching" class="reveal">
-    <p class="label">05 — Teaching Experience</p>
-    <div class="entry">
-      <span class="entry__title">&lt;Course Name&gt; — Teaching Assistant</span>
-      <span class="entry__date">&lt;Term&gt;</span>
-      <span class="entry__sub">&lt;University&gt;</span>
+  <section id="photos" class="reveal">
+    <p class="label">Gallery</p>
+    <h2>Photos</h2>
+    <!-- Replace each <span class="ph"> with: <img src="photos/1.jpg" alt="..."> -->
+    <div class="gallery">
+      <figure><div class="shot"><span class="ph">Photo 1</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
+      <figure><div class="shot"><span class="ph">Photo 2</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
+      <figure><div class="shot"><span class="ph">Photo 3</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
+      <figure><div class="shot"><span class="ph">Photo 4</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
+      <figure><div class="shot"><span class="ph">Photo 5</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
+      <figure><div class="shot"><span class="ph">Photo 6</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
     </div>
   </section>
 
-  <section id="awards" class="reveal">
-    <p class="label">06 — Awards &amp; Honors</p>
-    <div class="entry">
-      <span class="entry__title">&lt;Award / Scholarship&gt;</span>
-      <span class="entry__date">&lt;Year&gt;</span>
+  <section id="cv" class="reveal">
+    <p class="label">Full time</p>
+    <h2>The full record</h2>
+    <div class="prose">
+      <p>Education, publications, experience, and everything else — the whole ninety minutes, laid out in full.</p>
     </div>
-    <div class="entry">
-      <span class="entry__title">&lt;Award / Scholarship&gt;</span>
-      <span class="entry__date">&lt;Year&gt;</span>
-    </div>
-  </section>
-
-  <section id="skills" class="reveal">
-    <p class="label">07 — Technical Skills</p>
-    <div class="skills">
-      <div><span class="k">Programming</span><span>&lt;Python, R, C++, ...&gt;</span></div>
-      <div><span class="k">ML / Data</span><span>&lt;PyTorch, scikit-learn, pandas, ...&gt;</span></div>
-      <div><span class="k">Tools</span><span>&lt;Git, LaTeX, Linux, ...&gt;</span></div>
-      <div><span class="k">Languages</span><span>&lt;Korean (native), English (TOEFL xxx / IELTS x.x)&gt;</span></div>
-    </div>
-  </section>
-
-  <section id="talks" class="reveal">
-    <p class="label">08 — Talks &amp; Presentations</p>
-    <div class="entry">
-      <span class="entry__title">"&lt;Talk Title&gt;"</span>
-      <span class="entry__date">&lt;Year&gt;</span>
-      <span class="entry__sub">&lt;Event / Venue&gt;</span>
-    </div>
-  </section>
-
-  <section id="service" class="reveal">
-    <p class="label">09 — Professional Service</p>
-    <ul>
-      <li>Reviewer: &lt;Venue&gt;, &lt;Year&gt;</li>
-    </ul>
-  </section>
-
-  <section id="references" class="reveal">
-    <p class="label">10 — References</p>
-    <div class="refs">
-      <div class="ref">
-        <div class="name">&lt;Referee Name&gt;</div>
-        <div class="aff">&lt;Title&gt;, &lt;Affiliation&gt;</div>
-        <a href="mailto:&lt;email&gt;">&lt;email&gt;</a>
-      </div>
-      <div class="ref">
-        <div class="name">&lt;Referee Name&gt;</div>
-        <div class="aff">&lt;Title&gt;, &lt;Affiliation&gt;</div>
-        <a href="mailto:&lt;email&gt;">&lt;email&gt;</a>
-      </div>
-    </div>
+    <a class="cvcta" href="cv.html">View full CV<span class="arr">→</span></a>
   </section>
 </main>
 
-<footer>
-  <p class="wrap">Last updated: &lt;Month Year&gt;</p>
+<footer class="wrap">
+  <span class="who">&lt;Full Name&gt;</span>
+  <span class="contact">
+    <a href="mailto:&lt;email&gt;">&lt;email&gt;</a> &nbsp;·&nbsp;
+    <a href="https://github.com/&lt;id&gt;">GitHub</a> &nbsp;·&nbsp;
+    <a href="cv.html">CV</a>
+  </span>
 </footer>
 
 <script>
-  // scroll reveal
   var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-    });
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
 
-  // nav scrollspy
   var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav__scroll a"));
   var targets = navLinks.map(function (a) { return document.querySelector(a.getAttribute("href")); });
   var spy = new IntersectionObserver(function (entries) {
@@ -387,4 +309,30 @@
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   targets.forEach(function (t) { if (t) spy.observe(t); });
+
+  // "shoot the ball" CTA — random trajectory each time; auto-plays once on mobile
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll(".goalwrap").forEach(function (wrap) {
+      function shoot() {
+        if (reduce) return;
+        var dir = Math.random() < 0.5 ? -1 : 1;
+        var px = (0.15 + Math.random() * 1.15) * dir;           // horizontal aim (em)
+        var py = -(2.0 + Math.random() * 1.7);                  // height of the shot (rem)
+        var r  = (300 + Math.random() * 460) * (Math.random() < 0.5 ? -1 : 1); // spin
+        wrap.style.setProperty("--px", px.toFixed(2) + "em");
+        wrap.style.setProperty("--py", py.toFixed(2) + "rem");
+        wrap.style.setProperty("--r",  Math.round(r) + "deg");
+        wrap.classList.remove("shoot");
+        void wrap.offsetWidth;                                  // restart the animation
+        wrap.classList.add("shoot");
+      }
+      wrap.addEventListener("animationend", function () { wrap.classList.remove("shoot"); });
+      wrap.addEventListener("pointerenter", shoot);             // hover (desktop) or tap (mobile)
+      var seen = false;                                         // and play once when scrolled into view
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting && !seen) { seen = true; setTimeout(shoot, 450); } });
+      }, { threshold: 0.6 }).observe(wrap);
+    });
+  })();
 </script>

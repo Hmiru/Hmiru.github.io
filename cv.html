@@ -1,12 +1,15 @@
 <!--
-  Academic CV page. Reached from index.html via the "CV" nav link.
-  Fill in every <...> placeholder to match your cv.tex.
-  Note: the <style> block is intentionally the same as index.html — if you change
-  a color, change it in both files.
+  Academic CV — the full record, and the source of MiruHong_CV.pdf.
+  This is what goes to universities and labs; resume.html is the 1-page
+  industry cut. Edit here, then run ./build.sh to regenerate the PDF.
+
+  Anything still in <angle brackets> is unanswered and must not ship.
+  Note: the <style> block is intentionally the same as index.html and
+  resume.html — if you change a color, change it in all three.
 -->
-<title>CV — &lt;Full Name&gt;</title>
+<title>Miru Hong — Academic CV</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Academic CV of <Full Name>.">
+<meta name="description" content="Academic CV of Miru Hong — football AI, sequence models, counterfactual simulation.">
 
 <style>
   :root {
@@ -111,32 +114,98 @@
     .reveal { opacity:1; transform:none; transition:none; }
     .btn { transition:none; }
   }
+
+  /* ---------------------------------------------------------------
+     PRINT — this is what recruiters receive. build.sh renders this
+     stylesheet to MiruHong_CV.pdf via headless Chrome, and it is also
+     what a plain Ctrl+P produces. Check both after editing.
+     --------------------------------------------------------------- */
+  @page { size:A4; margin:16mm 15mm; }
+
+  @media print {
+    /* never let the reader's dark mode bleed into paper */
+    :root, :root[data-theme="light"], :root[data-theme="dark"] {
+      --paper:#fff; --surface:#fff; --ink:#111; --muted:#444;
+      --faint:#666; --rule:#c9c6bd; --accent:#14532d; --accent-2:transparent;
+    }
+    body { font-size:9.6pt; line-height:1.42; background:#fff; }
+    .wrap { max-width:none; padding:0; }
+
+    /* screen-only chrome */
+    .nav, .btn, footer { display:none !important; }
+
+    /* the reveal animation is JS-driven; without this every section
+       prints blank when JS hasn't run or hasn't fired the observer */
+    .reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+
+    .hero { padding:0 0 .5rem; }
+    .hero h1 { font-size:20pt; margin-bottom:.15rem; }
+    .hero .role { font-size:8pt; margin-bottom:.5rem; }
+    .contact { font-size:8.6pt; margin-bottom:.1rem; }
+    .idlinks { font-size:8.6pt; gap:0 .8rem; }
+
+    section { padding:.62rem 0; }
+    .label { font-size:7.6pt; margin-bottom:.5rem; }
+    .entry { margin-bottom:.62rem; }
+    .entry__title { font-size:10.4pt; }
+    .entry__sub, .entry__date { font-size:8.6pt; }
+    .entry ul { margin-top:.2rem; }
+    .entry li { margin:.05rem 0; }
+    .pub-group { margin-bottom:.72rem; }
+    ol.pubs li { margin-bottom:.42rem; }
+    .legend { margin-bottom:.5rem; }
+
+    /* Never split a single entry across pages, and keep a heading with its
+       body. Deliberately NOT on `section` — a long Publications section that
+       refuses to break would shunt itself to a fresh page and leave half a
+       page of white. */
+    .entry, .ref, ol.pubs li { break-inside:avoid; }
+    .label, .pub-group h3 { break-after:avoid; }
+
+    /* printed on paper a link is just ink — spell the target out. Only for
+       links whose text is a label rather than the address itself. */
+    a { color:inherit; text-decoration:none; }
+    /* a.tag, not .tag — a non-link tag (e.g. the award badge) has no href and
+       would print an empty "()" */
+    .idlinks a::after, .pubs a.tag::after {
+      content:" (" attr(href) ")"; font-family:var(--mono); font-size:7.2pt; color:#555;
+      word-break:break-all;
+    }
+    /* unfilled placeholder links would otherwise print a bare "(#)" */
+    .pubs .tag[href="#"]::after { content:none; }
+  }
 </style>
 
 <nav class="nav">
   <a class="nav__name" href="index.html">← Home</a>
   <span class="nav__links">
-    <a href="cv.pdf" download>Download PDF&nbsp;↓</a>
+    <a href="resume.html">1-page&nbsp;résumé</a>
+    <a href="MiruHong_CV.pdf" download>Download PDF&nbsp;↓</a>
   </span>
 </nav>
 
 <header class="hero wrap">
-  <h1>&lt;Full Name&gt;</h1>
-  <p class="role">&lt;PhD Applicant · Statistics / Machine Learning&gt;</p>
+  <h1>Miru Hong</h1>
+  <p class="role">PhD Applicant · Football AI · Machine Learning</p>
 
-  <p class="contact">&lt;Address, City, Country&gt;</p>
+  <p class="contact">Seoul, South Korea</p>
+  <!-- Personal address and phone are deliberately absent: this PDF is handed
+       out in bulk. The gmail address leads because the .ac.kr one dies at
+       graduation (Feb 2027), mid-application-cycle. -->
   <p class="contact">
-    <a href="mailto:&lt;email&gt;">&lt;email&gt;</a>
-    &nbsp;·&nbsp; &lt;phone&gt;
-    &nbsp;·&nbsp; <a href="https://&lt;website&gt;">&lt;website&gt;</a>
+    <a href="mailto:favoruu39@gmail.com">favoruu39@gmail.com</a>
+    &nbsp;·&nbsp; <a href="mailto:mirunoyume@uos.ac.kr">mirunoyume@uos.ac.kr</a>
+    &nbsp;·&nbsp; <a href="https://hmiru.github.io">hmiru.github.io</a>
   </p>
   <p class="idlinks">
-    <a href="https://github.com/&lt;id&gt;">GitHub</a>
-    <a href="https://orcid.org/&lt;id&gt;">ORCID</a>
-    <a href="https://scholar.google.com/&lt;id&gt;">Google Scholar</a>
+    <!-- &hl=ko trimmed off the Scholar link: it forces the Korean UI on
+         whoever clicks it, and most of them will not read Korean. -->
+    <a href="https://scholar.google.com/citations?user=jsxOv_kAAAAJ">Google Scholar</a>
+    <a href="https://github.com/Hmiru">GitHub</a>
+    <a href="https://www.linkedin.com/in/miru-hong-64b737285/">LinkedIn</a>
   </p>
 
-  <a class="btn" href="cv.pdf" download>
+  <a class="btn" href="MiruHong_CV.pdf" download>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
     Download CV (PDF)
   </a>
@@ -146,27 +215,29 @@
 
   <section id="research" class="reveal">
     <p class="label">01 — Research Interests</p>
-    <p class="lead">&lt;Comma-separated list, e.g. Machine Learning, Sports Analytics, Spatiotemporal Modeling, Causal Inference&gt;</p>
+    <!-- DRAFT — derived from the ECML-PKDD paper. Reorder so the first two
+         keywords match the lab you are writing to; that is the line a
+         professor skims first. -->
+    <p class="lead">Football AI, Generative Sequence Models, Counterfactual Simulation,
+      Disentangled Representation Learning, Spatiotemporal Modeling, Sports Analytics</p>
   </section>
 
   <section id="education" class="reveal">
     <p class="label">02 — Education</p>
     <div class="entry">
-      <span class="entry__title">&lt;University Name&gt;, &lt;Department&gt;</span>
-      <span class="entry__date">&lt;Start&gt;–&lt;Expected 20XX&gt;</span>
-      <span class="entry__sub">&lt;M.S. in Statistics&gt; · &lt;City, Country&gt;</span>
+      <span class="entry__title">University of Seoul, Dept. of Artificial Intelligence</span>
+      <span class="entry__date">2025–2027 (expected)</span>
+      <span class="entry__sub">M.S. in Artificial Intelligence · Seoul, South Korea</span>
       <ul>
-        <li>Advisor: &lt;Advisor Name&gt; &nbsp;|&nbsp; GPA: &lt;x.xx / 4.0&gt;</li>
-        <li>Thesis: <em>&lt;Thesis Title&gt;</em></li>
+        <li>Advisor: Prof. Sang-Ki Ko</li>
+        <li>Thesis (in progress): generative simulation of football from event
+          and 3D tracking data</li>
       </ul>
     </div>
     <div class="entry">
-      <span class="entry__title">&lt;University Name&gt;, &lt;Department&gt;</span>
-      <span class="entry__date">&lt;Start&gt;–&lt;End&gt;</span>
-      <span class="entry__sub">&lt;B.S. in ...&gt; · &lt;City, Country&gt;</span>
-      <ul>
-        <li>GPA: &lt;x.xx / 4.0&gt; &nbsp;|&nbsp; &lt;Honors, e.g. summa cum laude&gt;</li>
-      </ul>
+      <span class="entry__title">Inha University, Dept. of Computer Science and Engineering</span>
+      <span class="entry__date">2019–2025</span>
+      <span class="entry__sub">B.S. in Computer Science and Engineering · Incheon, South Korea</span>
     </div>
   </section>
 
@@ -178,19 +249,77 @@
       <h3>Peer-Reviewed</h3>
       <ol class="pubs">
         <li>
-          &lt;Authors, with <span class="me">your name in bold</span>&gt;. "&lt;Title&gt;."
-          <span class="venue">&lt;Venue&gt;</span>, &lt;Year&gt;.
-          <a class="tag" href="#">[paper]</a> <a class="tag" href="#">[code]</a>
+          <span class="me">Miru Hong</span>, Minho Lee, Geonhee Jo, Hyeokje Cho, Hyunsung Kim,
+          Pascal Bauer, Sang-Ki Ko<sup>†</sup>. "Modeling Matches as Language: A Generative
+          Transformer Approach for Counterfactual Player Valuation in Football."
+          <span class="venue">ECML-PKDD</span>, 2026. Applied Data Science Track.
+          <a class="tag" href="https://arxiv.org/abs/2603.15212">[paper]</a>
+        </li>
+        <li>
+          Minho Lee, Geonhee Jo, <span class="me">Miru Hong</span>, Pascal Bauer,
+          Sang-Ki Ko<sup>†</sup>.
+          "Valuing La Pausa: Quantifying Optimal Pass Timing Beyond Speed."
+          <span class="venue">MIT Sloan Sports Analytics Conference</span>, 2026.
+          <span class="tag">Research Paper Competition Finalist</span>
+        </li>
+        <!-- Submitted to Hudl as "EventGPT"; renamed to "ScoutGPT" on the arXiv
+             revision. The arXiv title is used here because that is what someone
+             searching will actually find. Note this is a DIFFERENT paper from the
+             ECML one above, whose model is also called ScoutGPT — if a reader ever
+             confuses the two, rename this entry back to EventGPT. -->
+        <li>
+          <span class="me">Miru Hong</span><sup>∗</sup>, Minho Lee<sup>∗</sup>, Geonhee Jo,
+          Jae-Hyun So, Pascal Bauer, Sang-Ki Ko<sup>†</sup>. "ScoutGPT: Capturing Player
+          Impact from Team Action Sequences Using GPT-Based Framework."
+          <span class="venue">Hudl Conference</span>, 2025.
+          <a class="tag" href="https://arxiv.org/abs/2512.17266">[paper]</a>
+        </li>
+        <li>
+          Geonhee Jo, <span class="me">Miru Hong</span>, Han-Jun Choi, Minho Lee,
+          Pascal Bauer, Sang-Ki Ko<sup>†</sup>. "Imputing Multi-Agent Trajectories from
+          Event and Snapshot Data in Soccer."
+          <span class="venue">CIKM</span>, 2025.
+        </li>
+        <li>
+          Minho Lee, Geonhee Jo, <span class="me">Miru Hong</span>, Pascal Bauer,
+          Sang-Ki Ko<sup>†</sup>. "exPress: Contextual Valuation of Individual Players
+          within Pressing Situations in Soccer."
+          <span class="venue">MIT Sloan Sports Analytics Conference</span>, 2025.
+        </li>
+        <li>
+          Minho Lee, Geonhee Jo, <span class="me">Miru Hong</span>, Pascal Bauer,
+          Sang-Ki Ko<sup>†</sup>. "Contextual Evaluation of Individual Contributions
+          from Pressing Situations in Football."
+          <span class="venue">MLSA Workshop @ ECML-PKDD</span>, 2025.
         </li>
       </ol>
     </div>
 
     <div class="pub-group">
-      <h3>Preprints / Under Review</h3>
+      <h3>In Preparation</h3>
       <ol class="pubs">
         <li>
-          &lt;Authors, with <span class="me">your name in bold</span>&gt;. "&lt;Title&gt;."
-          Under review at <span class="venue">&lt;Venue&gt;</span>, &lt;Year&gt;.
+          <span class="me">Miru Hong</span>, et al. Generative simulation of football from
+          event and 3D tracking data. In preparation, 2026. Extends the event-only model
+          with tracking data for trajectory generation, higher-fidelity simulation, and
+          context-aware player embeddings. <em>Also the basis of the M.S. thesis.</em>
+        </li>
+      </ol>
+    </div>
+
+    <div class="pub-group">
+      <h3>Domestic Conferences (Korean)</h3>
+      <ol class="pubs">
+        <li>
+          <span class="me">Miru Hong</span>, Minho Lee, Sang-Ki Ko<sup>†</sup>.
+          "Soccer Cross Outcome Prediction with 3D Ball Trajectories and Contextual Information."
+          <span class="venue">Korea Computer Congress (KCC)</span>, 2026.
+          <span class="tag">Outstanding Paper Award</span>
+        </li>
+        <li>
+          Geonhee Jo, <span class="me">Miru Hong</span>, Sang-Ki Ko<sup>†</sup>.
+          "Player Position Prediction Using Soccer Event and Snapshot Data."
+          <span class="venue">Korea Computer Congress (KCC)</span>, 2025.
         </li>
       </ol>
     </div>
@@ -199,81 +328,138 @@
   <section id="experience" class="reveal">
     <p class="label">04 — Research Experience</p>
     <div class="entry">
-      <span class="entry__title">&lt;Lab / Institution&gt; — &lt;Research Assistant&gt;</span>
-      <span class="entry__date">&lt;Start&gt;–&lt;End&gt;</span>
+      <span class="entry__title">CIDA Lab, University of Seoul — Graduate Research Assistant</span>
+      <span class="entry__date">2025–present</span>
+      <span class="entry__sub">Computational Intelligence and Data Analytics Laboratory · Advisor: Prof. Sang-Ki Ko</span>
       <ul>
-        <li>&lt;Start with an action verb; keep it concise&gt;</li>
-        <li>&lt;Quantify results with numbers where possible&gt;</li>
+        <li>Built <em>ScoutGPT</em>, an autoregressive Transformer that treats a football
+          match as language: each event is decomposed into discrete attributes
+          (actor, location, action type) and predicted by next-token prediction,
+          conditioned on lineup and match context.</li>
+        <li>Trained on 6.1M K League events across 2,283 matches (2021–2025); added a
+          value-prediction head aligned to VAEP, outperforming CatBoost, LSTM and
+          sequence-model baselines on next-event and goal prediction.</li>
+        <li>Enabled counterfactual transfer simulation via Monte Carlo sampling —
+          simulating a player into a new lineup and measuring the change in
+          offensive progression and goal probability. Cut post-transfer VAEP
+          forecast error against a naive carry-over baseline.</li>
+        <li>Extending the framework to 3D tracking data for trajectory generation and
+          context-aware player embeddings, with role-masking to keep positional role
+          from acting as a shortcut in cross-season player retrieval.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <span class="entry__title">Pixelscope — Industry Collaboration</span>
+      <span class="entry__date">2026, 3 months</span>
+      <ul>
+        <li>Built a pipeline that derives structured event data from raw player
+          tracking data, reaching F1 &gt; 0.90 on most kick events and F1 &gt; 0.85
+          on ball control.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <span class="entry__title">K League — Data Analysis Contributor</span>
+      <span class="entry__date">2025–2026</span>
+      <ul>
+        <li>Contributed to the 2025 K League end-of-season analytical review
+          (Technical Study Group report).</li>
+        <li>Taught at the K League Data Academy in 2025 and 2026, and produced its
+          teaching material.</li>
       </ul>
     </div>
   </section>
 
   <section id="teaching" class="reveal">
     <p class="label">05 — Teaching Experience</p>
+    <!-- Football Data Analytics leads on purpose: it is the one that corroborates
+         the research story. The other two show breadth. -->
     <div class="entry">
-      <span class="entry__title">&lt;Course Name&gt; — Teaching Assistant</span>
-      <span class="entry__date">&lt;Term&gt;</span>
-      <span class="entry__sub">&lt;University&gt;</span>
+      <span class="entry__title">Football Data Analytics — Teaching Assistant</span>
+      <span class="entry__date">Fall 2025</span>
+      <span class="entry__sub">University of Seoul · general elective</span>
+    </div>
+    <div class="entry">
+      <span class="entry__title">Reinforcement Learning — Teaching Assistant</span>
+      <span class="entry__date">Fall 2025</span>
+      <span class="entry__sub">University of Seoul</span>
+    </div>
+    <div class="entry">
+      <span class="entry__title">Trustworthy AI — Teaching Assistant</span>
+      <span class="entry__date">Spring 2026</span>
+      <span class="entry__sub">University of Seoul</span>
     </div>
   </section>
 
   <section id="awards" class="reveal">
     <p class="label">06 — Awards &amp; Honors</p>
     <div class="entry">
-      <span class="entry__title">&lt;Award / Scholarship&gt;</span>
-      <span class="entry__date">&lt;Year&gt;</span>
+      <span class="entry__title">Research Paper Competition Finalist, MIT Sloan Sports Analytics Conference</span>
+      <span class="entry__date">2026</span>
+      <span class="entry__sub">for "Valuing La Pausa: Quantifying Optimal Pass Timing Beyond Speed"</span>
     </div>
     <div class="entry">
-      <span class="entry__title">&lt;Award / Scholarship&gt;</span>
-      <span class="entry__date">&lt;Year&gt;</span>
+      <span class="entry__title">Outstanding Paper Award, Korea Computer Congress (KCC)</span>
+      <span class="entry__date">2026</span>
+      <span class="entry__sub">Korean Institute of Information Scientists and Engineers (KIISE)</span>
     </div>
   </section>
 
   <section id="skills" class="reveal">
     <p class="label">07 — Technical Skills</p>
     <div class="skills">
-      <div><span class="k">Programming</span><span>&lt;Python, R, C++, ...&gt;</span></div>
-      <div><span class="k">ML / Data</span><span>&lt;PyTorch, scikit-learn, pandas, ...&gt;</span></div>
-      <div><span class="k">Tools</span><span>&lt;Git, LaTeX, Linux, ...&gt;</span></div>
-      <div><span class="k">Languages</span><span>&lt;Korean (native), English (TOEFL xxx / IELTS x.x)&gt;</span></div>
+      <div><span class="k">Programming</span><span>Python (primary), C++</span></div>
+      <div><span class="k">ML / Data</span><span>PyTorch, XGBoost, CatBoost, scikit-learn, pandas, NumPy</span></div>
+      <div><span class="k">Methods</span><span>Autoregressive sequence models, Transformers, representation and
+        disentangled learning, causal inference, spatiotemporal modeling</span></div>
+      <div><span class="k">Football data</span><span>Event data (VERSA, VAEP), 2D/3D tracking data, event–tracking
+        synchronisation, K League and Bundesliga datasets</span></div>
+      <div><span class="k">Tools</span><span>Git, Docker (multi-GPU lab cluster), Linux, LaTeX</span></div>
+      <!-- OPIc IM2 and DELE A2 are deliberately not listed as scores. OPIc is a
+           Korean-market test European admissions offices do not read, and IM2
+           reads as "intermediate" to anyone who does look it up; A2 is
+           elementary. See the note in README before changing this. -->
+      <div><span class="k">Languages</span><span>Korean (native), English (working proficiency), Spanish (elementary)</span></div>
     </div>
   </section>
 
   <section id="talks" class="reveal">
     <p class="label">08 — Talks &amp; Presentations</p>
     <div class="entry">
-      <span class="entry__title">"&lt;Talk Title&gt;"</span>
-      <span class="entry__date">&lt;Year&gt;</span>
-      <span class="entry__sub">&lt;Event / Venue&gt;</span>
+      <span class="entry__title">"Modeling Matches as Language: A Generative Transformer
+        Approach for Counterfactual Player Valuation in Football"</span>
+      <span class="entry__date">2026</span>
+      <span class="entry__sub">ECML-PKDD, Applied Data Science Track · oral and poster</span>
+    </div>
+    <div class="entry">
+      <span class="entry__title">"Modeling Matches as Language: A Generative Transformer
+        Approach for Counterfactual Player Valuation in Football"</span>
+      <span class="entry__date">2026</span>
+      <span class="entry__sub">NU Sports ML Workshop, Nagoya University (organiser: Prof. Keisuke Fujii)
+        · preview of the ECML-PKDD paper</span>
+    </div>
+    <div class="entry">
+      <span class="entry__title">"Imputing Player Coordinates and Velocities using
+        Event Data in Football"</span>
+      <span class="entry__date">2025</span>
+      <span class="entry__sub">NU Sports ML Workshop, Nagoya University (organiser: Prof. Keisuke Fujii)</span>
     </div>
   </section>
 
-  <section id="service" class="reveal">
-    <p class="label">09 — Professional Service</p>
-    <ul>
-      <li>Reviewer: &lt;Venue&gt;, &lt;Year&gt;</li>
-    </ul>
-  </section>
+  <!-- Professional Service removed — an empty "Reviewer: <Venue>" line reads
+       worse than no section. Put it back the moment you review something. -->
 
   <section id="references" class="reveal">
-    <p class="label">10 — References</p>
-    <div class="refs">
-      <div class="ref">
-        <div class="name">&lt;Referee Name&gt;</div>
-        <div class="aff">&lt;Title&gt;, &lt;Affiliation&gt;</div>
-        <a href="mailto:&lt;email&gt;">&lt;email&gt;</a>
-      </div>
-      <div class="ref">
-        <div class="name">&lt;Referee Name&gt;</div>
-        <div class="aff">&lt;Title&gt;, &lt;Affiliation&gt;</div>
-        <a href="mailto:&lt;email&gt;">&lt;email&gt;</a>
-      </div>
-    </div>
+    <p class="label">09 — References</p>
+    <!-- Deliberately not listing referee names and emails: this PDF gets handed
+         out in bulk at a conference, and publishing your advisor's address to a
+         room of strangers is not yours to do. Swap in the full block for
+         individual applications where a school asks for it. -->
+    <p>Available upon request.</p>
   </section>
 </main>
 
 <footer>
-  <p><a href="index.html">← Back to home</a> &nbsp;·&nbsp; Last updated: &lt;Month Year&gt;</p>
+  <p><a href="index.html">← Back to home</a> &nbsp;·&nbsp; Last updated: July 2026</p>
 </footer>
 
 <script>

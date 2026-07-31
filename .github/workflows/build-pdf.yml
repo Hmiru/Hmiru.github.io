@@ -1,0 +1,45 @@
+name: build PDFs
+
+# The HTML is the source of truth; the PDFs are generated. Rebuild them on
+# every content change so the file a recruiter downloads can never drift from
+# the page they can read.
+#
+# No infinite loop: this only triggers on the HTML/build inputs, so the commit
+# it pushes back (PDFs only) does not re-trigger it.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - build.sh
+      - .github/workflows/build-pdf.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # pdfinfo / pdftotext back build.sh's page-count and "did it render
+      # blank?" checks. Without them the build silently skips both.
+      - name: Install poppler-utils
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Build
+        run: ./build.sh
+
+      - name: Commit refreshed PDFs
+        run: |
+          if [ -z "$(git status --porcelain -- '*.pdf')" ]; then
+            echo "PDFs already up to date"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ./*.pdf
+          git commit -m "Rebuild CV and résumé PDFs"
+          git push

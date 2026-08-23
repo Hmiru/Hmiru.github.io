@@ -2,3 +2,8 @@
 # An unpublished manuscript pushed here is world-readable and indexable.
 _ECML_PKDD*.pdf
 _KCC_*.pdf
+
+# Original camera/KakaoTalk photos. me.jpg is the cropped, web-sized version
+# that the site actually uses; the full-resolution original does not belong in
+# a public repo.
+KakaoTalk_*.jpg

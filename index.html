@@ -1,13 +1,20 @@
+<meta charset="utf-8">
 <!--
-  Personal landing page. Sections: About / Problems to solve / Interests / Photos.
-  The academic CV lives in cv.html (linked from the nav as "CV").
-  Fill in every <...> placeholder. Replace photo tiles with your own <img> files.
-  Note: the <style> block is intentionally the same as cv.html — if you change a
-  color, change it in both files.
+  Personal landing page. Sections: About / Problems to solve / CV.
+  The full academic CV lives in cv.html.
+
+  The Interests and Photos sections were removed rather than left as empty
+  placeholder tiles. The CSS for both is kept below, so putting either back is
+  a matter of pasting the markup again.
+
+  Note: the <style> block is intentionally the same as cv.html and resume.html.
+  If you change a color, change it in all three.
 -->
-<title>&lt;Full Name&gt;</title>
+<title>Miru Hong</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.png" sizes="32x32">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Personal homepage of <Full Name>.">
+<meta name="description" content="Miru Hong — football AI researcher. Generative models of the game, counterfactual simulation.">
 
 <style>
   :root {
@@ -73,6 +80,9 @@
   .nav__links a:hover { color:var(--ink); text-decoration:none; }
   .nav__links a.active { color:var(--accent); }
   .nav__links a.cv { color:var(--accent); }
+  /* the anchors inside .nav__scroll are only separated by source whitespace,
+     which collapses to almost nothing under the uppercase letter-spacing */
+  .nav__scroll { display:flex; gap:1.2rem; }
   @media (max-width:720px) { .nav__scroll { display:none; } }
 
   .wrap { max-width:var(--measure); margin:0 auto; padding:0 clamp(1.1rem,4vw,1.5rem); }
@@ -189,12 +199,11 @@
 </div>
 
 <nav class="nav">
-  <span class="nav__name">&lt;Full Name&gt;</span>
+  <span class="nav__name">Miru Hong</span>
   <span class="nav__links">
     <span class="nav__scroll">
       <a href="#about">About</a>
       <a href="#problems">Problems</a>
-      <a href="#photos">Photos</a>
     </span>
     <a class="cv" href="cv.html">CV&nbsp;→</a>
   </span>
@@ -204,16 +213,17 @@
   <div class="hero__grid">
     <div>
       <span class="kick"></span>
-      <p class="role">&lt;Football Analytics · Statistics&gt;</p>
-      <h1>&lt;Full Name&gt;</h1>
-      <p class="lead">&lt;One or two sentences: who you are and what drives you. e.g. "I read the game through data — modeling how football teams move, create space, and win."&gt;</p>
+      <p class="role">Football AI · Machine Learning</p>
+      <h1>Miru Hong</h1>
+      <p class="lead">Football is still a game of feel. I want to put clear numbers on that
+        feel, and to come closer to what the game is. I do not want to take anything away
+        from the people in it.</p>
       <div class="goalwrap">
         <span class="net" aria-hidden="true"></span>
         <a class="cvcta" href="cv.html"><span class="ball" aria-hidden="true"></span>View my CV<span class="arr">→</span></a>
       </div>
     </div>
-    <!-- Replace the <span> with: <img src="me.jpg" alt="Portrait of <Full Name>"> -->
-    <div class="portrait"><span>Photo</span></div>
+    <div class="portrait"><img src="me.jpg" alt="Portrait of Miru Hong"></div>
   </div>
 </header>
 
@@ -223,8 +233,13 @@
     <p class="label">About</p>
     <h2>Who I am</h2>
     <div class="prose">
-      <p>&lt;A short paragraph about your background — where you're from, what you studied, how you got into your field.&gt;</p>
-      <p>&lt;A second paragraph about how you think or work — what kind of problems pull you in, what you value in research or building things.&gt;</p>
+      <p>I love football, and I support Everton. For a long time, football was only a
+        game that I watched. Then it became a problem that I wanted to solve. A match is
+        continuous and chaotic. I wanted to know how much of that chaos a computer can
+        handle. The more I looked, the more possibility I saw.</p>
+      <p>If something does not work, I stay with it until it works. I prefer to finish a
+        problem before I go to the next one. I also think about the way I explain my work.
+        A result is not complete until other people can understand it in simple words.</p>
     </div>
   </section>
 
@@ -232,45 +247,30 @@
     <p class="label">Focus</p>
     <h2>Problems I want to solve</h2>
     <div class="prob">
-      <h3><span class="idx">01</span>&lt;A football/data question you care about&gt;</h3>
-      <p>&lt;Why it matters to you, and the angle you'd take. e.g. "How do you measure the value of an off-the-ball run?" Two or three sentences.&gt;</p>
+      <h3><span class="idx">01</span>An embedding that does not move with the context</h3>
+      <p>I want to model what a player is, and not what the team around them does.
+        Disentangled representation learning can separate the two. The goal is one
+        embedding for each player. That embedding must stay the same when the club
+        changes and when the manager changes.</p>
     </div>
     <div class="prob">
-      <h3><span class="idx">02</span>&lt;A second problem&gt;</h3>
-      <p>&lt;What's unsolved, and why you're drawn to it.&gt;</p>
+      <h3><span class="idx">02</span>What a player does after a transfer</h3>
+      <p>A transfer is the largest single cost for most clubs. It also has no correct
+        answer, so the whole decision sits under uncertainty. I want to simulate the
+        player inside the new team before the club pays. That simulation needs event data
+        and tracking data together, and next-token prediction and trajectory generation
+        together. The mechanisms behind large language models can carry much of this.</p>
     </div>
     <div class="prob">
-      <h3><span class="idx">03</span>&lt;A third problem&gt;</h3>
-      <p>&lt;Keep each one concrete and personal.&gt;</p>
-    </div>
-  </section>
-
-  <section id="interests" class="reveal">
-    <p class="label">Off the clock</p>
-    <h2>What I like</h2>
-    <div class="chips">
-      <span class="chip">Football</span>
-      <span class="chip">&lt;interest&gt;</span>
-      <span class="chip">&lt;interest&gt;</span>
-      <span class="chip">&lt;interest&gt;</span>
-      <span class="chip">&lt;interest&gt;</span>
+      <h3><span class="idx">03</span>How a young player will grow</h3>
+      <p>A finished player is expensive. A young one is not. Every person has something in
+        common with the people who came before them. If I can compare a young player with
+        the players who already grew up, I can see where they will go. This also needs a
+        clean separation from the context.</p>
     </div>
     <div class="prose">
-      <p>&lt;A few sentences on what you enjoy outside work — hobbies, sports, music, books, anything that says something about you.&gt;</p>
-    </div>
-  </section>
-
-  <section id="photos" class="reveal">
-    <p class="label">Gallery</p>
-    <h2>Photos</h2>
-    <!-- Replace each <span class="ph"> with: <img src="photos/1.jpg" alt="..."> -->
-    <div class="gallery">
-      <figure><div class="shot"><span class="ph">Photo 1</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
-      <figure><div class="shot"><span class="ph">Photo 2</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
-      <figure><div class="shot"><span class="ph">Photo 3</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
-      <figure><div class="shot"><span class="ph">Photo 4</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
-      <figure><div class="shot"><span class="ph">Photo 5</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
-      <figure><div class="shot"><span class="ph">Photo 6</span></div><figcaption>&lt;caption&gt;</figcaption></figure>
+      <p>In the end, football is what the players do. If I can encode the brain and the
+        feet of a player, I get a little closer to an answer.</p>
     </div>
   </section>
 
@@ -278,22 +278,20 @@
     <p class="label">Full time</p>
     <h2>The full record</h2>
     <div class="prose">
-      <p>Education, publications, experience, and everything else — the whole ninety minutes, laid out in full.</p>
+      <p>Education, publications, experience, and everything else. The whole ninety
+        minutes, laid out in full.</p>
     </div>
     <a class="cvcta" href="cv.html">View full CV<span class="arr">→</span></a>
-    <p style="margin-top:1rem; font-size:.95rem; color:var(--muted)">
-      In a hurry? There is a <a href="resume.html">one-page résumé</a> too —
-      or grab the <a href="MiruHong_CV.pdf" download>CV</a> /
-      <a href="MiruHong_Resume.pdf" download>résumé</a> as PDF.
-    </p>
   </section>
 </main>
 
 <footer class="wrap">
-  <span class="who">&lt;Full Name&gt;</span>
+  <span class="who">Miru Hong</span>
   <span class="contact">
-    <a href="mailto:&lt;email&gt;">&lt;email&gt;</a> &nbsp;·&nbsp;
-    <a href="https://github.com/&lt;id&gt;">GitHub</a> &nbsp;·&nbsp;
+    <a href="mailto:mirunoyume@uos.ac.kr">mirunoyume@uos.ac.kr</a> &nbsp;·&nbsp;
+    <a href="https://scholar.google.com/citations?user=jsxOv_kAAAAJ">Scholar</a> &nbsp;·&nbsp;
+    <a href="https://github.com/Hmiru">GitHub</a> &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/miru-hong-64b737285/">LinkedIn</a> &nbsp;·&nbsp;
     <a href="cv.html">CV</a>
   </span>
 </footer>

@@ -24,10 +24,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # build.sh renders with headless Chrome and exits immediately if it
+      # cannot find a browser. The runner image no longer ships one, which is
+      # why every run of this workflow failed until now. Install Chrome from
+      # Google's own repository rather than depending on whatever the image
+      # happens to include this month.
+      #
       # pdfinfo / pdftotext back build.sh's page-count and "did it render
       # blank?" checks. Without them the build silently skips both.
-      - name: Install poppler-utils
-        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Install Chrome and poppler-utils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils wget
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+          rm google-chrome-stable_current_amd64.deb
+          google-chrome --version
 
       - name: Build
         run: ./build.sh

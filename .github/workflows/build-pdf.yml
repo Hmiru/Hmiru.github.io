@@ -41,8 +41,12 @@ jobs:
           rm google-chrome-stable_current_amd64.deb
           google-chrome --version
 
+      # Invoked through bash rather than as ./build.sh. The working copy this
+      # repository is edited from sits on a mount that reports every file as
+      # 0777, so git never sees a real mode change and the executable bit is
+      # easy to lose again. This makes the workflow immune to that.
       - name: Build
-        run: ./build.sh
+        run: bash build.sh
 
       - name: Commit refreshed PDFs
         run: |

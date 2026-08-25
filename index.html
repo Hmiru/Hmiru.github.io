@@ -247,11 +247,15 @@
     <p class="label">Focus</p>
     <h2>Problems I want to solve</h2>
     <div class="prob">
-      <h3><span class="idx">01</span>An embedding that does not move with the context</h3>
-      <p>I want to model what a player is, and not what the team around them does.
-        Disentangled representation learning can separate the two. The goal is one
-        embedding for each player. That embedding must stay the same when the club
-        changes and when the manager changes.</p>
+      <h3><span class="idx">01</span>An embedding that survives a change of club</h3>
+      <p>I want one embedding for each player, and it should hold when the club changes
+        and when the manager changes. The hard part is deciding what to keep. Stripping
+        the team away and keeping only the player throws too much out, because part of
+        what makes a player great is how everyone else moves differently when they are
+        on the pitch. Mkhitaryan is recognisable at Arsenal, at Roma and at Inter, and
+        Messi is recognisable because the game around him changes shape. So the embedding
+        should capture what produces that change, rather than the change itself, and
+        disentangled representation learning is how I want to get there.</p>
     </div>
     <div class="prob">
       <h3><span class="idx">02</span>What a player does after a transfer</h3>

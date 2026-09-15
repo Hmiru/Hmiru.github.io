@@ -254,22 +254,27 @@
         alone. A player appears in thousands of sequences, with different teammates,
         different opponents and different states of the game. The player is the only
         thing that recurs while the rest moves. Disentangled representation learning is
-        how I want to pull that recurring part out.</p>
+        how I want to pull that recurring part out. If it works, the same embedding
+        should still hold after a transfer, and it should say why two players make
+        different choices in the same situation.</p>
     </div>
     <div class="prob">
-      <h3><span class="idx">02</span>What a player does after a transfer</h3>
-      <p>A transfer is the largest single cost for most clubs. It also has no correct
-        answer, so the whole decision sits under uncertainty. I want to simulate the
-        player inside the new team before the club pays. That simulation needs event data
-        and tracking data together, and next-token prediction and trajectory generation
-        together. The mechanisms behind large language models can carry much of this.</p>
+      <h3><span class="idx">02</span>One model for the ball and for the running</h3>
+      <p>Event data records what happens to the ball. Tracking data records where everyone
+        else is while it happens. The two are usually modelled apart, so a model learns
+        either the decision or the movement, never both. I want a single model that
+        generates the next event and the movement around it at the same time. The run
+        that drags a defender out of position is part of why the pass was on, and a model
+        that never sees the run cannot account for the pass.</p>
     </div>
     <div class="prob">
-      <h3><span class="idx">03</span>How a young player will grow</h3>
-      <p>A finished player is expensive. A young one is not. Every person has something in
-        common with the people who came before them. If I can compare a young player with
-        the players who already grew up, I can see where they will go. This also needs a
-        clean separation from the context.</p>
+      <h3><span class="idx">03</span>What a player does inside a different team</h3>
+      <p>A transfer is the largest single cost for most clubs, and there is no correct
+        answer to check it against. I want to put a player into a new lineup and let the
+        match run, before the club pays. The same machinery answers the smaller questions
+        too: whether a player suits a particular system, and what changes when the lineup
+        changes. Aggregate statistics cannot do this. They say what a player did somewhere
+        else. They do not say what happens here.</p>
     </div>
     <div class="prose">
       <p>In the end, football is what the players do. If I can encode the brain and the

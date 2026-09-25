@@ -1,9 +1,7 @@
-# Paper drafts and manuscripts — this repo is public and serves GitHub Pages.
-# An unpublished manuscript pushed here is world-readable and indexable.
-_ECML_PKDD*.pdf
-_KCC_*.pdf
+# Private working material — this repo is public and serves GitHub Pages.
+# Anything here would otherwise be world-readable and indexable.
+papers/drafts/
+phd-contact/
+assets/originals/
 
-# Original camera/KakaoTalk photos. me.jpg is the cropped, web-sized version
-# that the site actually uses; the full-resolution original does not belong in
-# a public repo.
-KakaoTalk_*.jpg
+# The public, cropped portrait lives at assets/me.jpg.

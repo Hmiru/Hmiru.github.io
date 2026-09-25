@@ -12,6 +12,9 @@
 | `build.sh` | 위 두 HTML을 PDF로 렌더 |
 | `MiruHong_CV.pdf` | 생성물. 직접 수정 금지 |
 | `MiruHong_Resume.pdf` | 생성물. 직접 수정 금지 |
+| `assets/` | 사이트 이미지와 아이콘 |
+| `papers/drafts/` | 공개 저장소에서 제외한 논문 초안 |
+| `phd-contact/` | 박사과정 컨택 기록과 research summary |
 
 **HTML이 유일한 소스입니다.** PDF는 빌드 산출물이라 손으로 고치면 다음 빌드에
 덮어써집니다. 내용은 항상 `.html`에서 고치고 `./build.sh`를 다시 돌리세요.

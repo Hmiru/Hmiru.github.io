@@ -63,14 +63,12 @@ grep -o '&lt;[^&]*&gt;' cv.html resume.html | sort -u
 
 ## 어학 표기에 대해
 
-Skills의 Languages 줄은 **점수를 일부러 안 적었습니다** (`English (working proficiency)`).
+Skills의 Languages 줄: `English (IELTS 7.0), Spanish (DELE A2)`.
 
-- 보유: OPIc IM2, DELE A2.
-- OPIc은 한국 취업시장용 시험이라 유럽 입학사정관이 읽지 못하고, 찾아보면 IM2는
-  "중급"으로 읽힙니다. DELE A2는 초급입니다. 적으면 오히려 감점 요인입니다.
-- **표기와 별개로 실제 요건이 남아 있습니다.** 유럽 PhD는 대부분 IELTS 6.5~7.0
-  또는 TOEFL 90+를 정식 입학 요건으로 겁니다. 점수를 받으면 그때 이 줄을
-  `English (IELTS 7.0, 2026)` 형태로 바꾸세요.
+- OPIc IM2는 적지 않습니다. 한국 취업시장용 시험이라 유럽 입학사정관이 읽지 못하고,
+  찾아보면 "중급"으로 읽힙니다.
+- 유럽 PhD는 대부분 IELTS 6.5~7.0 또는 TOEFL 90+를 정식 입학 요건으로 겁니다.
+  IELTS 7.0은 이 요건을 충족합니다.
 
 ## 작성법
 
